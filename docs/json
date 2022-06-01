@@ -1,0 +1,10 @@
+ficheUser
+
+{   
+    "userId": "6003017ab2604e2c5ca1ffb9",
+    "nom": "JEAN",
+    "prenom": "DUPON",
+    "age":40,
+    "photoProfilUrl" : "dddd",
+    "__v": 0
+} 
