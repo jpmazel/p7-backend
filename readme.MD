@@ -12,6 +12,8 @@
 
 -Et après il faut lancer le serveur React du frontend
 
+-Le cahier des charges est dans le dossier docs
+
 # Routes
 Toutes les routes nécessitent une authentification par TOKEN
 La documentation des routes : https://documenter.getpostman.com/view/12219452/Uz5FHvvV
