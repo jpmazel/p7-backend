@@ -3,10 +3,6 @@ const mysqlconnection = require("../db/db.mysql");
 
 //Pour créer un POST dans le feed---------------------------------
 exports.createPost = async (req, res) => {
-  console.log("Je suis dans le controller createPosts");
-  console.log("CONTENU: req.body");
-  console.log(req.body);
-
   //Extractions des values pour les mettre dans des variables
   const { userId, message, photoUrlLink, videoYTUrlLink } = req.body;
 
@@ -42,8 +38,6 @@ exports.createPost = async (req, res) => {
 
 //Pour récupérer tous les posts pour les afficher dans le feed
 exports.readAllPost = async (req, res) => {
-  console.log("Je suis dans readAllPost");
-
   try {
     //La requête SQL JOINTURE INTERNE
     //INNER JOIN pour récupérer tous les posts sur la table posts_user
@@ -82,16 +76,10 @@ exports.readAllPost = async (req, res) => {
 };
 
 exports.deleteOnePost = async (req, res) => {
-  console.log("Je suis dans le controller deleteOnePost");
-
   //Aller chercher id_posts_user à supprimer (l'id de la ligne dans la table mysql)
   const id_posts_user = req.params.id;
-  console.log("--->id_posts_user");
-  console.log(id_posts_user);
 
   const userIdUrl = userIdParamsUrl;
-  console.log("userId dans la requête");
-  console.log(userIdUrl);
 
   try {
     //Contrôler si l'utilisateur est ADMIN de niveau 1 pour la modération des POST
@@ -166,22 +154,14 @@ exports.deleteOnePost = async (req, res) => {
 };
 
 exports.updateOnePost = async (req, res) => {
-  console.log("Je suis dans le controller updateOnePost");
-
   //Aller chercher id_posts_user pour savoir quel message il faut modifier
   const idPostsUser = req.params.id;
-  console.log("-->id_posts_user");
-  console.log(idPostsUser);
 
   //Aller chercher l'userId dans l'url pour savoir si le user est autorisé à modifier le message
   const userIdUrl = userIdParamsUrl;
-  console.log("userId dans l'url");
-  console.log(userIdUrl);
 
   //Récupérer le contenu du body de la requête car dedans il y a le message à MODIFIER
   const message = req.body.posts_user_message;
-  console.log("-->req.body.posts_user_message");
-  console.log(req.body.posts_user_message);
 
   try {
     //Récupérer le message pour comparer userId dans le message stocké dans la bdd

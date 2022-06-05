@@ -7,8 +7,6 @@ const app = require("./app");
 //importer le package pour utiliser les variables d'environnement
 const dotenv = require("dotenv");
 const result = dotenv.config();
-// console.log(result);
-
 
 //paramètrage du port avec la méthode set de Express
 app.set("port", process.env.PORT);
@@ -19,11 +17,7 @@ app.set("port", process.env.PORT);
 const server = http.createServer(app);
 
 //le serveur écoute les requêtes sur le port
-server.listen(process.env.PORT,
-  console.log(`ecoute du port ${process.env.PORT}`));
-
-
-
-
-
-
+server.listen(
+  process.env.PORT,
+  console.log(`ecoute du port ${process.env.PORT}`)
+);

@@ -2,9 +2,6 @@
 const mysqlconnection = require("../db/db.mysql");
 
 exports.createLikePost = async (req, res) => {
-  console.log("Je suis dans le controller createLikePost");
-  console.log(req.body);
-
   //Récupération des values qui sont passées dans la request
   const { likes_user_id_posts, likes_user_userId, likes_user_like } = req.body;
 
@@ -38,15 +35,11 @@ exports.createLikePost = async (req, res) => {
 };
 
 exports.readLikeOnePost = async (req, res) => {
-  console.log("Je suis dans readLikeOnePost");
-
   // Récupération de l'userId qui est passé dans l'url de la requête
   const userId = req.originalUrl.split("=")[1];
-  console.log(`-->userId: ${userId}`);
 
   //Récupération de l'id_posts
   const id_posts = req.params.id;
-  console.log(`-->id_posts :${id_posts}`);
 
   //Récupération des données sur la base de données MySQL
   try {
@@ -70,16 +63,11 @@ exports.readLikeOnePost = async (req, res) => {
 };
 
 exports.updateLikeOnePost = async (req, res) => {
-  console.log("je suis dans updateLikeOnePost");
-
   //Récupération de l'id_likes_user
   const id_likes = req.params.id;
-  console.log(`id_likes : ${id_likes}`);
 
   //Récupération dans le body de la value dans la key likes_user_like
   const like = req.body.likes_user_like;
-  console.log("Valeur du like dans le body");
-  console.log(like);
 
   //Fonction pour convertir
   //si like = 0 je passe à un
@@ -92,9 +80,6 @@ exports.updateLikeOnePost = async (req, res) => {
       return 0;
     }
   };
-
-  console.log("-->fonction newLike");
-  console.log(newLike(like));
 
   //La requête vers le serveur
   try {
@@ -111,13 +96,17 @@ exports.updateLikeOnePost = async (req, res) => {
 
     // const values = [newLike(like), id_likes];
 
-    await mysqlconnection.query(querySql, [newLike(like), id_likes], (error, results) => {
-      if (error) {
-        res.status(500).json({ error });
-      } else {
-        res.status(201).json({ results });
+    await mysqlconnection.query(
+      querySql,
+      [newLike(like), id_likes],
+      (error, results) => {
+        if (error) {
+          res.status(500).json({ error });
+        } else {
+          res.status(201).json({ results });
+        }
       }
-    });
+    );
   } catch (error) {
     res.status(500).json({ error });
   }

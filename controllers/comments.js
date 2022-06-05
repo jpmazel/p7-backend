@@ -3,10 +3,6 @@ const mysqlconnection = require("../db/db.mysql");
 
 //Pour créer un POST dans le feed---------------------------------
 exports.createPostComments = async (req, res) => {
-  console.log("Je suis dans le controller createPostsComments");
-  console.log("CONTENU: req.body");
-  console.log(req.body);
-
   //Extractions des values pour les mettre dans des variables
   const { userId, idPost, message } = req.body;
 
@@ -40,15 +36,11 @@ exports.createPostComments = async (req, res) => {
 };
 
 exports.readCommentsOnePost = async (req, res) => {
-  console.log("Je suis dans readCommentsOnePost");
-
   // Récupération de l'userId qui est passé dans l'url de la requête
   const userId = req.originalUrl.split("=")[1];
-  console.log(`-->userId: ${userId}`);
 
   //Récupération de l'id_posts
   const id_posts = req.params.id;
-  console.log(`-->id_posts :${id_posts}`);
 
   //Récupération des données sur la base de données MySQL
   try {
@@ -74,16 +66,10 @@ exports.readCommentsOnePost = async (req, res) => {
 };
 
 exports.deleteOneComment = async (req, res) => {
-  console.log("Je suis dans deleteOneComment");
-
   //Aller chercher 	id_comments_user à supprimer (l'id de la ligne dans la table mysql)
   const id_comments_user = req.params.id;
-  console.log("--->	id_comments_user");
-  console.log(id_comments_user);
 
   const userIdUrl = userIdParamsUrl;
-  console.log("userId dans la requête");
-  console.log(userIdUrl);
 
   try {
     //Contrôler si l'utilisateur est ADMIN de niveau 1 pour la modération des comments
@@ -158,22 +144,14 @@ exports.deleteOneComment = async (req, res) => {
 };
 
 exports.updateOneComment = async (req, res) => {
-  console.log("Je suis dans updateOneComment");
-
   //Aller chercher id_comments_user pour savoir quel message il faut modifier
   const idCommentUser = req.params.id;
-  console.log("-->id_comments_user");
-  console.log(idCommentUser);
 
   //Aller chercher l'userId dans l'url pour savoir si le user est autorisé à modifier le message
   const userIdUrl = userIdParamsUrl;
-  console.log("userId dans l'url");
-  console.log(userIdUrl);
 
   //Récupérer le contenu du body de la requête car dedans il y a le message à MODIFIER
   const message = req.body.comments_user_message;
-  console.log("-->req.body.comments_user_message");
-  console.log(message);
 
   try {
     //Récupérer le message pour comparer userId dans le commentaire stocké dans la bdd

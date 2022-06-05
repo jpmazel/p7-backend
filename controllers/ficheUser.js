@@ -1,54 +1,20 @@
 //importation du models de la base de donnée MongoDB
 const FicheUser = require("../models/FicheUser");
 
-const {
-  readAllFicheUserQuery,
-  readOneFicheUserQuery,
-  findByIdAndDeleteQuery,
-} = require("../queries/ficheUserQueries");
-
 //importation du module fs de node.js pour accéder aux fichiers du serveur
 const fs = require("fs");
 const mysqlconnection = require("../db/db.mysql");
 
 exports.createFicheUser = async (req, res) => {
   //créer une fiche user SANS IMAGE
-  console.log("CONTENU : req.body - controllers/ficheUser");
-  console.log(req.body);
-
-  console.log("CONTENU : req.body.ficheUser - controllers/ficheUser");
-  console.log(req.body.ficheUser);
-
-  console.log("--->CONTENU POST: req.file");
-  console.log(req.file);
-
   //pas besoin d'utiliser un JSON.parse() pour req.body.ficheUser
   const userFicheObject = JSON.parse(req.body.ficheUser);
 
-  console.log("--->CONTENU userFicheObject - controllers/ficheUser");
-  console.log(userFicheObject);
-
-  console.log("--->POUR FABRIQUER l'URL de l'IMAGE");
-  console.log(req.protocol);
-  console.log(req.get("host"));
-  // console.log(req.file.filename);
-
-  //l'instance FicheUser
   //les variables
-  const { userId, nom, prenom, age , job, bio} = userFicheObject;
-  
-  // const photoProfilUrl = `${req.protocol}://${req.get("host")}/images/${
-  //   req.file.filename
-  // }`;
-
-  console.log("-->userId, nom, prenom,age, job, bio");
-  console.log(userId, nom, prenom, age, job, bio, );
+  const { userId, nom, prenom, age, job, bio } = userFicheObject;
 
   //l'instance
   const ficheUser = new FicheUser(userId, nom, prenom, age, job, bio);
-
-  console.log("-->ficheUser");
-  console.log(ficheUser);
 
   //enregistrer l'objet dans la base de donnée
   /*
@@ -62,7 +28,7 @@ exports.createFicheUser = async (req, res) => {
     fiche_user(fiche_user_userId, fiche_user_nom, fiche_user_prenom, fiche_user_age,fiche_user_job,fiche_user_bio)
     VALUES (?)
      `;
-    const values = [userId, nom, prenom, age,job,bio];
+    const values = [userId, nom, prenom, age, job, bio];
 
     const ficheUser = await mysqlconnection.query(
       querySql,
@@ -102,14 +68,8 @@ exports.readAllFicheUser = async (req, res) => {
 
 //ECMAScript2017
 exports.readOneFicheUser = async (req, res) => {
-  console.log("Je suis dans readOneFicheUser");
-  console.log("--->res.originalUrl");
-  console.log(req.originalUrl.split("=")[1]);
-
   try {
     const id = req.originalUrl.split("=")[1];
-    console.log(id);
-
 
     const querySql = "SELECT * FROM fiche_user WHERE fiche_user_userId = ?";
     // SELECT * FROM `fiche_user` WHERE `fiche_user_userId`= 87
@@ -130,20 +90,7 @@ exports.readOneFicheUser = async (req, res) => {
   }
 };
 
-// // //ECMAScript2015
-// exports.readOneFicheUser = (req, res) => {
-//   FicheUser.findOne({ _id: req.params.id })
-//     .then((lObjet) => res.status(200).json(lObjet))
-//     .catch((error) => res.status(404).json({ error }));
-// };
-
 exports.updateOneFicheUser = async (req, res) => {
-  console.log("--->ROUTE PUT : updateOneFicheUser");
-  console.log(req.params.id);
-
-  console.log("--->CONTENU PUT: req.file");
-  console.log(req.file);
-
   //Aller chercher l'objet dans la table ficheUser
   try {
     const id = req.params.id;
@@ -161,21 +108,14 @@ exports.updateOneFicheUser = async (req, res) => {
           console.log(results);
 
           //controle autorisation de la modification par l'userId
-          console.log("-->userIdParamsUrl et fiche_user_userId");
-          console.log(userIdParamsUrl);
-          console.log(results[0].fiche_user_userId);
-
           if (userIdParamsUrl == results[0].fiche_user_userId) {
             console.log("Authorisation pour modification de l'objet");
 
             //s'il y un fichier attaché à modifier
             if (req.file) {
               //récupération du nom de la photoà supprimer dans la base de données
-              const filename = results[0].fiche_user_photoProfilUrl.split(
-                "/images"
-              )[1];
-              console.log("--->filename");
-              console.log(filename);
+              const filename =
+                results[0].fiche_user_photoProfilUrl.split("/images")[1];
 
               //suppression de l'image dans le dossier images du serveur
               // fs.unlink(`images/${filename}`, (error) => {
@@ -184,15 +124,7 @@ exports.updateOneFicheUser = async (req, res) => {
             }
 
             //l'objet qui va être mise à jour dans la base de donnée
-            console.log("--->CONTENU: req.body");
-            console.log(req.body);
-
-            console.log("--->CONTENU: req.body.ficheUser");
-            console.log(req.body.ficheUser);
-
             const userFicheObject = JSON.parse(req.body.ficheUser);
-            console.log("--->CONTENU: userFicheObject");
-            console.log(userFicheObject);
 
             //création des variables qui vont être utilisé pour l'envoie dans MySQL
             //deux cas possible avec et sans le fichier image
@@ -225,15 +157,8 @@ exports.updateOneFicheUser = async (req, res) => {
                   `id_fiche_user` = 19
 
          */
-            const {
-              userId,
-              nom,
-              prenom,
-              age,
-              job,
-              bio,
-              photoProfilUrl,
-            } = ficheUserObject;
+            const { userId, nom, prenom, age, job, bio, photoProfilUrl } =
+              ficheUserObject;
             console.log("-->userId, nom, prenom, age,  photoProfilUrl");
             console.log(userId, nom, prenom, age, job, bio, photoProfilUrl);
 
@@ -265,8 +190,8 @@ exports.updateOneFicheUser = async (req, res) => {
           `;
 
             const values = req.file
-              ? [nom, prenom, age,job, bio, photoProfilUrl, id]
-              : [nom, prenom, age, job, bio ,id];
+              ? [nom, prenom, age, job, bio, photoProfilUrl, id]
+              : [nom, prenom, age, job, bio, id];
 
             console.log("-->values");
             console.log(values);
@@ -304,8 +229,6 @@ exports.deleteOneFicheUser = async (req, res) => {
   try {
     //Aller chercher l'id de l'objet à supprimer dans la requête
     const id = req.params.id;
-    console.log("-->id");
-    console.log(id);
 
     const querySql = "SELECT * FROM fiche_user WHERE id_fiche_user = ?";
 
@@ -329,17 +252,13 @@ exports.deleteOneFicheUser = async (req, res) => {
         }
 
         //controle autorisation de la modification par l'userId
-        console.log("-->userIdParamsUrl et fiche_user_userId");
-        console.log(userIdParamsUrl);
-        console.log(results[0].fiche_user_userId);
 
         if (userIdParamsUrl == results[0].fiche_user_userId) {
           console.log("Autorisation pour SUPPRESSION de l'objet");
 
           //récupération du nom de la photo à supprimer dans la bdd
-          const filename = results[0].fiche_user_photoProfilUrl.split(
-            "/images"
-          )[1];
+          const filename =
+            results[0].fiche_user_photoProfilUrl.split("/images")[1];
           console.log("--->filename");
           console.log(filename);
 
@@ -388,17 +307,13 @@ exports.deleteOneFicheUser = async (req, res) => {
   }
 };
 
-
-exports.readFicheUserComment  = async (req, res) => {
-  console.log("Je suis dans readFicheUserComment pour afficher la photo nom prenom dans les commentaires")
-
+exports.readFicheUserComment = async (req, res) => {
   //Récupération de l'userId qui est passe dans l'url et qui est la fiche utilisateur
   // de l'userId qui a créé le commentaire
   const userIdComment = req.params.id;
-  console.log(`userIdComment : ${userIdComment}`)
 
   try {
-    // LA requête SQL 
+    // LA requête SQL
     //SELECT  `fiche_user_nom`, `fiche_user_prenom`,   `fiche_user_photoProfilUrl` FROM `fiche_user` WHERE `fiche_user_userId`= 2
     const querySql = `
     SELECT  
@@ -408,7 +323,7 @@ exports.readFicheUserComment  = async (req, res) => {
     WHERE 
       fiche_user_userId= ?    
     `;
-    
+
     const ficheUser = await mysqlconnection.query(
       querySql,
       [userIdComment],
@@ -423,5 +338,4 @@ exports.readFicheUserComment  = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error });
   }
-
-}
+};

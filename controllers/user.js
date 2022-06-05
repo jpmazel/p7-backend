@@ -109,7 +109,7 @@ exports.login = (req, res) => {
             res.status(201).json({
               userId: results[0].id,
               token,
-              admin: results[0].admin
+              admin: results[0].admin,
             });
           })
           .catch((error) => res.status(500).json({ error }));
@@ -121,13 +121,9 @@ exports.login = (req, res) => {
 //DELETE account pour supprimer le compte utilisateur
 //je récupére l'id de l'utilisateur à supprimer
 exports.deleteAccount = async (req, res) => {
-  console.log("je suis dans le controller deleteAccount");
-
   try {
     //Aller chercher l'id de l'utilisateur à supprimer
     const id = userIdParamsUrl;
-    console.log("--->id utilisateur");
-    console.log(id);
 
     //La requête SQL pour la suppresion du compte
     //DELETE FROM `user` WHERE `id`=25
@@ -137,8 +133,6 @@ exports.deleteAccount = async (req, res) => {
   `;
 
     const values = [id];
-    console.log("--->Values pour la requête SQL");
-    console.log(values);
 
     //La connexion à la base de donnée mySQL
     await mysqlconnection.query(querySql, values, (error, results) => {

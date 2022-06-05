@@ -1,7 +1,7 @@
 {
   "name": "p7",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projet 7 Backend Formation OC",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
