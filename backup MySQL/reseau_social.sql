@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 31 mai 2022 à 22:19
--- Version du serveur :  10.4.17-MariaDB
--- Version de PHP : 8.0.2
+-- Généré le : lun. 06 juin 2022 à 08:20
+-- Version du serveur : 10.4.24-MariaDB
+-- Version de PHP : 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,11 +43,17 @@ INSERT INTO `comments_user` (`id_comments_user`, `comments_user_id_posts`, `comm
 (300, 748, 75, 'Bonjour, Barbara bienvenu sur le nouveau réseau social', '2022-05-31 11:43:39'),
 (302, 753, 2, 'Il faudra qu\'un jour j\'apprenne React ', '2022-05-31 22:04:03'),
 (303, 753, 57, 'Super je vais regarder cette vidéo sur React18', '2022-05-31 22:05:58'),
-(304, 754, 57, 'Intéressant , c\'est synthétique ', '2022-05-31 22:06:41'),
 (305, 742, 77, 'c\'est cool', '2022-05-31 22:08:34'),
 (306, 753, 77, 'Moi je suis graphiste , je ne suis pas développeur, je ne comprends rien à React', '2022-05-31 22:09:10'),
 (307, 750, 77, 'Les likes c\'est une fonctionnalité intéressante', '2022-05-31 22:10:06'),
-(308, 752, 75, 'super , si tu as des idées, on est preneur. Envoie moi un mail', '2022-05-31 22:12:30');
+(308, 752, 75, 'super , si tu as des idées, on est preneur. Envoie moi un mail', '2022-05-31 22:12:30'),
+(314, 753, 75, 'il y a une nouvelle documentation technique qui est en train de sortir. Elle remplace l\'ancienne documentation car dans la nouvelle les hooks sont utilisé pour les exemples alors que dans l\'ancienne c\'était les classes qui sont maintenant obsolète pour du code moderne https://beta.reactjs.org/', '2022-06-04 08:33:43'),
+(315, 750, 2, 'c\'est super', '2022-06-04 08:37:54'),
+(316, 748, 2, 'salut , moi ça fait 10 ans et je suis toujours là', '2022-06-04 08:38:23'),
+(320, 757, 77, 'Super, les nouveaux apprenants ont de la chance car l\'ancienne version est basé sur les classes et pas sur les hooks...', '2022-06-04 09:23:57'),
+(327, 767, 57, 'les props ont leurs limites pour faire monter de l\'information. Il vaut mieux passer par l\'API React Context ', '2022-06-06 08:14:47'),
+(328, 767, 77, 'et pour les plus courageux il faut apprendre Redux : \"A Predictable State Container for JS Apps\"', '2022-06-06 08:16:17'),
+(329, 767, 75, 'tout à fait', '2022-06-06 08:17:03');
 
 -- --------------------------------------------------------
 
@@ -101,9 +107,15 @@ INSERT INTO `likes_user` (`id_likes_user`, `likes_user_id_posts`, `likes_user_us
 (72, 752, 77, 0),
 (73, 753, 2, 1),
 (74, 753, 57, 1),
-(75, 754, 75, 1),
 (76, 750, 2, 1),
-(77, 750, 57, 1);
+(77, 750, 57, 1),
+(79, 748, 2, 1),
+(82, 757, 2, 0),
+(83, 757, 77, 1),
+(88, 757, 75, 1),
+(89, 767, 57, 1),
+(90, 767, 77, 1),
+(91, 767, 75, 1);
 
 -- --------------------------------------------------------
 
@@ -130,7 +142,8 @@ INSERT INTO `posts_user` (`id_posts_user`, `posts_user_userId`, `posts_user_mess
 (750, 75, 'La fonctionnalité des likes sur les posts est disponible', NULL, NULL, '2022-05-31 09:42:15'),
 (752, 77, 'Il faudrait améliorer le graphisme de ce site...je suis graphiste', NULL, NULL, '2022-05-31 21:48:28'),
 (753, 75, 'React18 est disponible...Une vidéo qui montre les nouveautés ', NULL, 'https://youtu.be/N0DhCV_-Qbg', '2022-05-31 22:00:19'),
-(754, 2, 'Un résumé de ce qu\'est l\'UX design en une photo ', 'https://atelierssud.ch/storage/2015/01/ux-experience-utilisateur-marketing-design.png', NULL, '2022-05-31 22:03:10');
+(757, 2, 'La nouvelle documentation de React,  toutes les explications sont écrites en utilisant des Hooks plutôt que des classes. Il y a des exemples interactifs et des diagrammes visuels. Les guides incluent des défis (avec des solutions !) pour vérifier votre compréhension. C\'est une version béta\n\nhttps://beta.reactjs.org/', NULL, NULL, '2022-06-04 09:22:15'),
+(767, 2, 'un schéma du \"prop drilling \"', 'https://beta.reactjs.org/_next/image?url=%2Fimages%2Fdocs%2Fdiagrams%2Fpassing_data_prop_drilling.png&w=1920&q=75', NULL, '2022-06-06 08:12:09');
 
 -- --------------------------------------------------------
 
@@ -205,31 +218,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `comments_user`
 --
 ALTER TABLE `comments_user`
-  MODIFY `id_comments_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=310;
+  MODIFY `id_comments_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=330;
 
 --
 -- AUTO_INCREMENT pour la table `fiche_user`
 --
 ALTER TABLE `fiche_user`
-  MODIFY `id_fiche_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `id_fiche_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
 
 --
 -- AUTO_INCREMENT pour la table `likes_user`
 --
 ALTER TABLE `likes_user`
-  MODIFY `id_likes_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id_likes_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT pour la table `posts_user`
 --
 ALTER TABLE `posts_user`
-  MODIFY `id_posts_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=756;
+  MODIFY `id_posts_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=768;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- Contraintes pour les tables déchargées

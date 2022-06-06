@@ -8,7 +8,8 @@
 
 -Il faut créé un fichier .env à la racine pour les variables d'environnement. Les données sont dans le fichier .env.
 
--Après sous VSCode , il faut lancer le backend : `$ npm run start`
+-Après sous VSCode, pour installer les packages : `npm install`
+-Après sous VSCode , il faut lancer le backend : ` npm run start`
 
 -Et après il faut lancer le serveur React du frontend
 

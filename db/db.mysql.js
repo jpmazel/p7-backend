@@ -4,7 +4,6 @@ dotenv.config();
 
 //importer mysql
 const mysql = require("mysql");
-// console.log(mysql);
 
 //les paramètres de connexion à la base de données
 const mysqlconnection = mysql.createConnection({
