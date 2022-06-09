@@ -9,7 +9,7 @@ console.log(process.env.DB_NAME)
 
 //les paramètres de connexion à la base de données
 const mysqlconnection = mysql.createConnection({
-  host: 'localhost',
+  host: process.env.DB_HOST,
   // database: `${process.env.DB_NAME}`,
   database: process.env.DB_NAME,
   user: process.env.DB_USER,
