@@ -79,7 +79,7 @@ exports.login = (req, res) => {
         if (results == 0) {
           return res
             .status(404)
-            .json({ error: "utilisateur inexistant dans la bdd" });
+            .json({ error: "Vérifier l'email et / ou le password" });
         }
 
         //Controler la validité du password envoyer par le front
@@ -90,7 +90,7 @@ exports.login = (req, res) => {
             if (!controlPassword) {
               return res
                 .status(401)
-                .json({ error: "le mot de passe est incorrect" });
+                .json({ error: " Vérifier l'email et / ou le password" });
             }
 
             //si le password est correct
