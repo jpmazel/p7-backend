@@ -51,8 +51,7 @@ exports.readAllPost = async (req, res) => {
       posts_user_videoYTUrlLink,
       posts_user_date,
       posts_user_userId,
-      id_posts_user
-      
+      id_posts_user    
 
     FROM
       user

@@ -20,8 +20,7 @@ module.exports = (req, res, next) => {
     userIdParamsUrl = req.originalUrl.split("=")[1];
 
     //comparaison du userId qu'il y a en clair dans le req avec le userId qu'il y a dans le token
-    if (userIdParamsUrl == userIdDecodedToken) {
-      console.log("AUTHENTIFICATION OK je passe au middleware suivant");
+    if (userIdParamsUrl == userIdDecodedToken) {      
       next();
     } else {
       throw "Erreur identification userId incorrect";
