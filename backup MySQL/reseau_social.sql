@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 06 juin 2022 à 08:20
+-- Généré le : ven. 10 juin 2022 à 20:21
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -41,19 +41,12 @@ CREATE TABLE `comments_user` (
 
 INSERT INTO `comments_user` (`id_comments_user`, `comments_user_id_posts`, `comments_user_userId`, `comments_user_message`, `comments_user_date`) VALUES
 (300, 748, 75, 'Bonjour, Barbara bienvenu sur le nouveau réseau social', '2022-05-31 11:43:39'),
-(302, 753, 2, 'Il faudra qu\'un jour j\'apprenne React ', '2022-05-31 22:04:03'),
-(303, 753, 57, 'Super je vais regarder cette vidéo sur React18', '2022-05-31 22:05:58'),
 (305, 742, 77, 'c\'est cool', '2022-05-31 22:08:34'),
-(306, 753, 77, 'Moi je suis graphiste , je ne suis pas développeur, je ne comprends rien à React', '2022-05-31 22:09:10'),
-(307, 750, 77, 'Les likes c\'est une fonctionnalité intéressante', '2022-05-31 22:10:06'),
 (308, 752, 75, 'super , si tu as des idées, on est preneur. Envoie moi un mail', '2022-05-31 22:12:30'),
-(314, 753, 75, 'il y a une nouvelle documentation technique qui est en train de sortir. Elle remplace l\'ancienne documentation car dans la nouvelle les hooks sont utilisé pour les exemples alors que dans l\'ancienne c\'était les classes qui sont maintenant obsolète pour du code moderne https://beta.reactjs.org/', '2022-06-04 08:33:43'),
 (315, 750, 2, 'c\'est super', '2022-06-04 08:37:54'),
 (316, 748, 2, 'salut , moi ça fait 10 ans et je suis toujours là', '2022-06-04 08:38:23'),
-(320, 757, 77, 'Super, les nouveaux apprenants ont de la chance car l\'ancienne version est basé sur les classes et pas sur les hooks...', '2022-06-04 09:23:57'),
-(327, 767, 57, 'les props ont leurs limites pour faire monter de l\'information. Il vaut mieux passer par l\'API React Context ', '2022-06-06 08:14:47'),
-(328, 767, 77, 'et pour les plus courageux il faut apprendre Redux : \"A Predictable State Container for JS Apps\"', '2022-06-06 08:16:17'),
-(329, 767, 75, 'tout à fait', '2022-06-06 08:17:03');
+(349, 808, 77, 'intéressant', '2022-06-10 20:16:22'),
+(350, 748, 77, 'Salut', '2022-06-10 20:16:44');
 
 -- --------------------------------------------------------
 
@@ -77,10 +70,10 @@ CREATE TABLE `fiche_user` (
 --
 
 INSERT INTO `fiche_user` (`id_fiche_user`, `fiche_user_userId`, `fiche_user_nom`, `fiche_user_prenom`, `fiche_user_age`, `fiche_user_job`, `fiche_user_bio`, `fiche_user_photoProfilUrl`) VALUES
-(7, 2, 'Brown', 'Brenda', 36, 'UX Designer', 'L\'UX Designer a comme objectif de diminuer au maximum les interrogations que peut avoir un utilisateurs lors de sa navigation sur un site web. Il doit donc faire en sorte que l\'ergonomie soit adapté à la fois aux cibles définies mais aussi au message de la marque, aux messages marketing et aux éléments de réassurances', 'http://localhost:3000/images/photo-by-face-generator_femme-1.jpg_1654026308067.jpg'),
-(136, 57, 'Scott', 'Barbara ', 32, 'Développeur front-end', 'Le développeur front end programme la partie visible, l\'interface utilisateur d\'une app ou d\'un site web ', 'http://localhost:3000/images/photo-by-face-generator_femme-2.jpg_1654026347490.jpg'),
-(148, 75, 'DOE', 'John', 43, 'Développeur Web full stack javascript', 'J\'apprends les technologies pour être développeur full stack JavaScript.\nChez Groupomania je suis ADMINISTRATEUR et modérateur des messages du réseau social \n', 'http://localhost:3000/images/fakePhoto1-512x512px-homme-1.jpg_1654026202173.jpg'),
-(149, 77, 'SALISBURY', 'Danny', 36, 'Graphiste', 'Affiches, brochures publicitaires, couvertures, emballages… Au cours de leur conception, la plupart des documents écrits passent entre les mains d’un graphiste. ', 'http://localhost:3000/images/photo-by-face-generator_homme-2.jpg_1654026441347.jpg');
+(7, 2, 'BROWN', 'Brenda', 36, 'UX Designer', 'L\'UX Designer a comme objectif de diminuer au maximum les interrogations que peut avoir un utilisateurs lors de sa navigation sur un site web. Il doit donc faire en sorte que l\'ergonomie soit adapté à la fois aux cibles définies mais aussi au message de la marque, aux messages marketing et aux éléments de réassurances', 'http://localhost:3000/images/photo-by-face-generator_femme-1.jpg.jpg_1654805514151.jpg'),
+(136, 57, 'SCOTT', 'Barbara ', 32, 'Développeur front-end', 'Le développeur front end programme la partie visible, l\'interface utilisateur d\'une app ou d\'un site web ', 'http://localhost:3000/images/photo-by-face-generator_femme-2.jpg.jpg_1654805485958.jpg'),
+(148, 75, 'DOE', 'John', 43, 'Développeur Web full stack javascript', 'J\'apprends les technologies pour être développeur full stack JavaScript.\nChez Groupomania je suis ADMINISTRATEUR et modérateur des messages du réseau social www\n', 'http://localhost:3000/images/fakePhoto1-512x512px-homme-1.jpg.jpg_1654839382322.jpg'),
+(149, 77, 'SALISBURY', 'Danny', 36, 'Graphiste', 'Affiches, brochures publicitaires, couvertures, emballages… Au cours de leur conception, la plupart des documents écrits passent entre les mains d’un graphiste. ', 'http://localhost:3000/images/photo-by-face-generator_homme-2.jpg.jpg_1654805450634.jpg');
 
 -- --------------------------------------------------------
 
@@ -105,17 +98,11 @@ INSERT INTO `likes_user` (`id_likes_user`, `likes_user_id_posts`, `likes_user_us
 (69, 750, 75, 1),
 (70, 750, 77, 1),
 (72, 752, 77, 0),
-(73, 753, 2, 1),
-(74, 753, 57, 1),
 (76, 750, 2, 1),
 (77, 750, 57, 1),
 (79, 748, 2, 1),
-(82, 757, 2, 0),
-(83, 757, 77, 1),
-(88, 757, 75, 1),
-(89, 767, 57, 1),
-(90, 767, 77, 1),
-(91, 767, 75, 1);
+(98, 780, 75, 1),
+(106, 808, 77, 1);
 
 -- --------------------------------------------------------
 
@@ -141,9 +128,9 @@ INSERT INTO `posts_user` (`id_posts_user`, `posts_user_userId`, `posts_user_mess
 (748, 57, 'salut, je suis dans la société Groupomania depuis 2 semaines', NULL, NULL, '2022-05-30 21:28:43'),
 (750, 75, 'La fonctionnalité des likes sur les posts est disponible', NULL, NULL, '2022-05-31 09:42:15'),
 (752, 77, 'Il faudrait améliorer le graphisme de ce site...je suis graphiste', NULL, NULL, '2022-05-31 21:48:28'),
-(753, 75, 'React18 est disponible...Une vidéo qui montre les nouveautés ', NULL, 'https://youtu.be/N0DhCV_-Qbg', '2022-05-31 22:00:19'),
-(757, 2, 'La nouvelle documentation de React,  toutes les explications sont écrites en utilisant des Hooks plutôt que des classes. Il y a des exemples interactifs et des diagrammes visuels. Les guides incluent des défis (avec des solutions !) pour vérifier votre compréhension. C\'est une version béta\n\nhttps://beta.reactjs.org/', NULL, NULL, '2022-06-04 09:22:15'),
-(767, 2, 'un schéma du \"prop drilling \"', 'https://beta.reactjs.org/_next/image?url=%2Fimages%2Fdocs%2Fdiagrams%2Fpassing_data_prop_drilling.png&w=1920&q=75', NULL, '2022-06-06 08:12:09');
+(780, 75, 'Le lien est cliquable :\nhttps://www.youtube.com/watch?v=N0DhCV_-Qbg et c\'est une vidéo YouTube sur React18', NULL, NULL, '2022-06-08 17:04:53'),
+(808, 75, 'Le lien de la nouvelle documentation react : https://beta.reactjs.org/\n', NULL, NULL, '2022-06-10 09:27:16'),
+(815, 77, 'Passer des data par les props : le props drilling', 'https://beta.reactjs.org/_next/image?url=%2Fimages%2Fdocs%2Fdiagrams%2Fpassing_data_prop_drilling.dark.png&w=1920&q=75', NULL, '2022-06-10 20:18:00');
 
 -- --------------------------------------------------------
 
@@ -218,31 +205,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `comments_user`
 --
 ALTER TABLE `comments_user`
-  MODIFY `id_comments_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=330;
+  MODIFY `id_comments_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=351;
 
 --
 -- AUTO_INCREMENT pour la table `fiche_user`
 --
 ALTER TABLE `fiche_user`
-  MODIFY `id_fiche_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `id_fiche_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT pour la table `likes_user`
 --
 ALTER TABLE `likes_user`
-  MODIFY `id_likes_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id_likes_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT pour la table `posts_user`
 --
 ALTER TABLE `posts_user`
-  MODIFY `id_posts_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=768;
+  MODIFY `id_posts_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=816;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- Contraintes pour les tables déchargées
