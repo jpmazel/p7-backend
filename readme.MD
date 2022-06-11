@@ -21,5 +21,9 @@
 Toutes les routes nécessitent une authentification par TOKEN
 La documentation des routes : https://documenter.getpostman.com/view/12219452/Uz5FHvvV
 
+Formation développeur web 
+Soutenance du dernier projet passée le 10 juin 2022 et soutenance réussie
+Profil linkedin : https://www.linkedin.com/in/jeanpierremazel/
+
 
 

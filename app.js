@@ -1,6 +1,9 @@
 //importation de express
 const express = require("express");
 
+//Importation de Helmet
+const helmet = require("helmet");
+
 //importation de morgan (logger http);
 const morgan = require("morgan");
 
@@ -17,6 +20,11 @@ const path = require('path');
 
 //pour créer une application express
 const app = express();
+
+//Utilisation des middleware de Helmet
+app.use(helmet({
+  crossOriginResourcePolicy: false
+}));
 
 //logger les requests et les responses
 app.use(morgan("dev"));
