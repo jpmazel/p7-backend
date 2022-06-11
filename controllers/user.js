@@ -1,3 +1,6 @@
+//Importation du module fs
+const fs = require("fs");
+
 //importation de bcrypt pour hasher le password
 const bcrypt = require("bcrypt");
 
@@ -121,27 +124,71 @@ exports.login = (req, res) => {
 //DELETE account pour supprimer le compte utilisateur
 //je récupére l'id de l'utilisateur à supprimer
 exports.deleteAccount = async (req, res) => {
+  console.log("je suis dans le controller deleteAccount");
+
   try {
-    //Aller chercher l'id de l'utilisateur à supprimer
-    const id = userIdParamsUrl;
+    //01-je récupére l'id de l'utilisateur à supprimer qui est passé dans l'url
+    const userId = userIdParamsUrl;
+    console.log("--->id utilisateur");
+    console.log(userId);
 
-    //La requête SQL pour la suppresion du compte
-    //DELETE FROM `user` WHERE `id`=25
+    //02-Aller récupérer l'url de la photo de la fiche utilisateur dans la bdd
     const querySql = `
-  DELETE FROM user
-  WHERE id = ?
-  `;
+     SELECT
+       fiche_user_photoProfilUrl
+     FROM
+       fiche_user
+     WHERE
+      fiche_user_userId = ?
+    `;
 
-    const values = [id];
+    const values = [userId];
 
-    //La connexion à la base de donnée mySQL
-    await mysqlconnection.query(querySql, values, (error, results) => {
+    await mysqlconnection.query(querySql, [values], (error, results) => {
       if (error) {
-        res.status(500).json({ error });
+        res.json({ error });
       } else {
-        res.status(201).json({
-          message: "Compte utilisateur effacé de la base de donnée",
-          results,
+        console.log(
+          "Récupération de l'url de la photo de fiche utilisateur sur la bdd"
+        );
+        console.log(results);
+
+        // 03-Récupération du nom de la photo qui vient de la bdd
+        const filename =
+          results[0].fiche_user_photoProfilUrl.split("/images")[1];
+        console.log("--->filename");
+        console.log(filename);
+
+        //04-Suppression de la photo de profil qui est dans le dossier images du serveur
+        fs.unlink(`images/${filename}`, (error) => {
+          if (error) {
+            console.log(error);
+          }
+        });
+
+        //05-La suppression du compte utilisateur et de toutes données de l'utilisateur sur la bdd
+        //La requête SQL pour la suppresion du compte
+        //DELETE FROM `user` WHERE `id`=25
+        const querySql2 = `
+            DELETE
+            FROM 
+                user
+            WHERE
+               id = ?
+    `;
+
+        const values2 = [userId];
+
+        //La connexion à la base de donnée mySQL
+        mysqlconnection.query(querySql2, values2, (error, results) => {
+          if (error) {
+            res.status(500).json({ error });
+          } else {
+            res.status(201).json({
+              message: "Compte utilisateur effacé de la base de donnée",
+              results,
+            });
+          }
         });
       }
     });

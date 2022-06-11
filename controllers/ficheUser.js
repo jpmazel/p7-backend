@@ -118,9 +118,11 @@ exports.updateOneFicheUser = async (req, res) => {
                 results[0].fiche_user_photoProfilUrl.split("/images")[1];
 
               //suppression de l'image dans le dossier images du serveur
-              // fs.unlink(`images/${filename}`, (error) => {
-              //   if (error) throw error;
-              // });
+              fs.unlink(`images/${filename}`, (error) => {
+                if (error){
+                  console.log(error)
+                }
+              });
             }
 
             //l'objet qui va être mise à jour dans la base de donnée
