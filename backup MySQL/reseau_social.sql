@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 11 juin 2022 à 21:14
+-- Généré le : ven. 17 juin 2022 à 22:08
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -72,7 +72,7 @@ CREATE TABLE `fiche_user` (
 INSERT INTO `fiche_user` (`id_fiche_user`, `fiche_user_userId`, `fiche_user_nom`, `fiche_user_prenom`, `fiche_user_age`, `fiche_user_job`, `fiche_user_bio`, `fiche_user_photoProfilUrl`) VALUES
 (7, 2, 'BROWN', 'Brenda', 36, 'UX Designer', 'L\'UX Designer a comme objectif de diminuer au maximum les interrogations que peut avoir un utilisateurs lors de sa navigation sur un site web. Il doit donc faire en sorte que l\'ergonomie soit adapté à la fois aux cibles définies mais aussi au message de la marque, aux messages marketing et aux éléments de réassurances', 'http://localhost:3000/images/photo-by-face-generator_femme-1.jpg.jpg_1654974718316.jpg'),
 (136, 57, 'SCOTT', 'Barbara ', 32, 'Développeur front-end', 'Le développeur front end programme la partie visible, l\'interface utilisateur d\'une app ou d\'un site web ', 'http://localhost:3000/images/photo-by-face-generator_femme-2.jpg.jpg_1654974757696.jpg'),
-(148, 75, 'DOE', 'John', 43, 'Développeur Web full stack javascript', 'J\'apprends les technologies pour être développeur full stack JavaScript.\nChez Groupomania je suis ADMINISTRATEUR et modérateur des messages du réseau social www\n', 'http://localhost:3000/images/fakePhoto1-512x512px.jpg_1654974643267.jpg'),
+(148, 75, 'DOE', 'John', 43, 'Développeur Web full stack javascript', 'J\'apprends les technologies pour être développeur full stack JavaScript.\nChez Groupomania je suis ADMINISTRATEUR et modérateur des messages du réseau social www\n', 'http://localhost:3000/images/fakePhoto1-512x512px.jpg_1655046997113.jpg'),
 (149, 77, 'SALISBURY', 'Danny', 36, 'Graphiste', 'Affiches, brochures publicitaires, couvertures, emballages… Au cours de leur conception, la plupart des documents écrits passent entre les mains d’un graphiste. ', 'http://localhost:3000/images/photo-by-face-generator_homme-2.jpg.jpg_1654974780058.jpg');
 
 -- --------------------------------------------------------
@@ -154,8 +154,7 @@ INSERT INTO `user` (`id`, `email`, `password`, `admin`, `date`) VALUES
 (2, 'e12895395f30e7274b08d75ce008363ad54c70ac8ad95dad48f88a36ee5cc3ee', '$2b$10$ZEelhLAYrFaJO.iY0mYE0utGfPtj/MYxDyxaftgo6chJ41FyjRb8O', NULL, '2022-04-21 11:14:29'),
 (57, '4598428dd0c2833d609b43ec091ef970a6d3f3b51c4c90c07cd699a3ae7e85df', '$2b$10$HNTDfyyi8smom2bLLPp2wORQaTtiFLgWth0KXQl2uGvszB3L8ina.', NULL, '2022-05-26 14:08:13'),
 (75, '27eede426cf4692668a47a3d0b653e726580a30d88eb52f687daad26658bb466', '$2b$10$5cuhZw0QKuAdLDJzZfsgyOSqA9yZfcJVkomQZ7qEcDOYI5IO4yKeS', 1, '2022-05-28 17:18:37'),
-(77, 'e9c20f34a7252011fae4aec58ac3a3915ced13ab2d0968386693959cd7483bd6', '$2b$10$uQrfMi29SqZu3NWSYEyyOeNyobx9sZXS60Ilmqz2k/S8dCQEoEh0O', NULL, '2022-05-31 21:47:00'),
-(92, 'ea19205b0de9ac12b3ac8eaa114a12ceed72fc507cf3881ba0e43503266df9e9', '$2b$10$4pBbkD1MhO.Owli3lMkFTOs.z6E8vv30GVeMe0z.lMrGuP2ROrFyO', NULL, '2022-06-11 21:13:36');
+(77, 'e9c20f34a7252011fae4aec58ac3a3915ced13ab2d0968386693959cd7483bd6', '$2b$10$uQrfMi29SqZu3NWSYEyyOeNyobx9sZXS60Ilmqz2k/S8dCQEoEh0O', NULL, '2022-05-31 21:47:00');
 
 --
 -- Index pour les tables déchargées
@@ -196,6 +195,7 @@ ALTER TABLE `posts_user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `id` (`id`);
 
 --
@@ -206,31 +206,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `comments_user`
 --
 ALTER TABLE `comments_user`
-  MODIFY `id_comments_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=351;
+  MODIFY `id_comments_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=352;
 
 --
 -- AUTO_INCREMENT pour la table `fiche_user`
 --
 ALTER TABLE `fiche_user`
-  MODIFY `id_fiche_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+  MODIFY `id_fiche_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
 
 --
 -- AUTO_INCREMENT pour la table `likes_user`
 --
 ALTER TABLE `likes_user`
-  MODIFY `id_likes_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `id_likes_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT pour la table `posts_user`
 --
 ALTER TABLE `posts_user`
-  MODIFY `id_posts_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=817;
+  MODIFY `id_posts_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=819;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- Contraintes pour les tables déchargées
