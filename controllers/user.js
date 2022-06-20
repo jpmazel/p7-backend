@@ -51,7 +51,7 @@ exports.signup = (req, res) => {
           } else {
             console.log("-->results");
             console.log(results);
-            res.json({ message: "Utilisateur enregistré" });
+            res.json({ results: { message: "Utilisateur enregistré" } });
           }
         }
       );
@@ -110,9 +110,11 @@ exports.login = (req, res) => {
 
             //réponse du serveur avec le userId , le token et l'admin état
             res.status(201).json({
-              userId: results[0].id,
-              token,
-              admin: results[0].admin,
+              results: {
+                userId: results[0].id,
+                token,
+                admin: results[0].admin,
+              },
             });
           })
           .catch((error) => res.status(500).json({ error }));
