@@ -8,80 +8,195 @@ const mysqlconnection = require("../db/db.mysql");
 
 exports.createFicheUser = async (req, res) => {
   //créer une fiche user SANS IMAGE
-  console.log("CONTENU : req.body - controllers/ficheUser");
+  console.log("01-CONTENU : req.body - controllers/ficheUser");
   console.log(req.body);
 
-  console.log("CONTENU : req.body.ficheUser - controllers/ficheUser");
+  console.log("02-CONTENU : req.body.ficheUser - controllers/ficheUser");
   console.log(req.body.ficheUser);
 
-  console.log("--->CONTENU POST: req.file");
+  console.log("03-LE FICHIER->CONTENU POST: req.file createFicheUser");
   console.log(req.file);
 
   //pas besoin d'utiliser un JSON.parse() pour req.body.ficheUser
   const userFicheObject = JSON.parse(req.body.ficheUser);
 
-  console.log("--->CONTENU userFicheObject - controllers/ficheUser");
+  console.log("04---->CONTENU userFicheObject - controllers/ficheUser");
   console.log(userFicheObject);
 
-  console.log("--->POUR FABRIQUER l'URL de l'IMAGE");
+  console.log("05---->POUR FABRIQUER l'URL de l'IMAGE");
   console.log(req.protocol);
   console.log(req.get("host"));
   // console.log(req.file.filename);
 
+  //création des variables qui vont être utilisé pour l'envoie dans MySQL
+  //deux cas possible avec et sans le fichier image
+  const ficheUserObject = req.file
+    ? {
+        ...JSON.parse(req.body.ficheUser),
+        photoProfilUrl: `${req.protocol}://${req.get("host")}/images/${
+          req.file.filename
+        }`,
+      }
+    : {
+        ...JSON.parse(req.body.ficheUser),
+      };
+
+  console.log("-->POST CONTENU : ficheUserObject");
+  console.log(ficheUserObject);
+
+  const { userId, nom, prenom, age, job, bio, photoProfilUrl, newFiche } =
+    ficheUserObject;
+
+  console.log("-->POST userId, nom, prenom, age,  photoProfilUrl");
+  console.log(userId, nom, prenom, age, job, bio, photoProfilUrl, newFiche);
+  // INSERT INTO `fiche_user`( `fiche_user_userId`, `fiche_user_nom`, `fiche_user_prenom`, `fiche_user_age`, `fiche_user_photoProfilUrl`)
+
+  const querySql = req.file
+    ? `
+            INSERT 
+            INTO 
+                fiche_user(
+                  fiche_user_userId, 
+                  fiche_user_nom, 
+                  fiche_user_prenom, 
+                  fiche_user_age,
+                  fiche_user_job,
+                  fiche_user_bio,
+                  fiche_user_photoProfilUrl,
+                  fiche_user_new_fiche)
+            VALUES (?)
+             `
+    : `
+            INSERT 
+            INTO 
+                fiche_user(
+                  fiche_user_userId, 
+                  fiche_user_nom, 
+                  fiche_user_prenom, 
+                  fiche_user_age,
+                  fiche_user_job,
+                  fiche_user_bio,                  
+                  fiche_user_new_fiche)
+            VALUES (?)
+             `;
+
+  const values = req.file
+    ? [userId, nom, prenom, age, job, bio, photoProfilUrl, newFiche]
+    : [userId, nom, prenom, age, job, bio, newFiche];
+
+  console.log("--->querySql");
+  console.log(querySql);
+  console.log("-->values ");
+  console.log(values);
+  console.log([values]);
+  try {
+    mysqlconnection.query(querySql, [values], (error, results) => {
+      if (error) {
+        res.json({ error });
+      } else {
+        res.status(200).json({ results });
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
+
+  //     querySql,
+  //     [values],
+  //     (error, results) => {
+  //       if (error) {
+  //         res.json({ error });
+  //       } else {
+  //         res.status(200).json({ results });
+  //         console.log("results");
+  //         console.log(results);
+  //       }
+  //     }
+  //   );
+  // } catch (err) {
+  //   res.status(500).json({ error: err });
+  // }
+
   //l'instance FicheUser
   //les variables
-  const { userId, nom, prenom, age, job, bio, newFiche } = userFicheObject;
+  // const { userId, nom, prenom, age, job, bio, photoProfilUrl, newFiche } =
+  // ficheUserObject;
 
   // const photoProfilUrl = `${req.protocol}://${req.get("host")}/images/${
   //   req.file.filename
   // }`;
 
-  console.log("-->userId, nom, prenom,age, job, bio");
-  console.log(userId, nom, prenom, age, job, bio,newFiche);
+  // console.log(
+  //   "06 -->userId, nom, prenom, age, job, bio,photoProfilUrl, newFiche"
+  // );
+  // console.log(userId, nom, prenom, age, job, bio, photoProfilUrl, newFiche);
 
-  //l'instance
-  const ficheUser = new FicheUser(userId, nom, prenom, age, job, bio,newFiche);
+  // //l'instance
+  // const ficheUser = new FicheUser(
+  //   userId,
+  //   nom,
+  //   prenom,
+  //   age,
+  //   job,
+  //   bio,
+  //   photoProfilUrl,
+  //   newFiche
+  // );
 
-  console.log("-->ficheUser");
-  console.log(ficheUser);
+  // console.log("07-->ficheUser");
+  // console.log(ficheUser);
 
   //enregistrer l'objet dans la base de donnée
   /*
   INSERT INTO `fiche_user`( `fiche_user_userId`, `fiche_user_nom`, `fiche_user_prenom`, `fiche_user_age`, `fiche_user_photoProfilUrl`) 
   VALUES (1,'tmetlardy','e-genieclimatique',12,'fdsfdsfdsfd')
   */
-  try {
-    const querySql = `
-    INSERT 
-    INTO 
-    fiche_user(
-      fiche_user_userId, 
-      fiche_user_nom, 
-      fiche_user_prenom, 
-      fiche_user_age,
-      fiche_user_job,
-      fiche_user_bio,
-      fiche_user_new_fiche      
-      )
-    VALUES (?)
-     `;
+  // try {
+  // const querySql = `
+  // INSERT
+  // INTO
+  // fiche_user(
+  //   fiche_user_userId,
+  //   fiche_user_nom,
+  //   fiche_user_prenom,
+  //   fiche_user_age,
+  //   fiche_user_job,
+  //   fiche_user_bio,
+  //   fiche_user_photoProfilUrl,
+  //   fiche_user_new_fiche
+  //   )
+  // VALUES (?)
+  //  `;
 
-    const values = [userId, nom, prenom, age, job, bio, newFiche];
+  //   const values = [
+  //     userId,
+  //     nom,
+  //     prenom,
+  //     age,
+  //     job,
+  //     bio,
+  //     photoProfilUrl,
+  //     newFiche,
+  //   ];
+  //   console.log("08-values");
+  //   console.log(values);
 
-    const ficheUser = await mysqlconnection.query(
-      querySql,
-      [values],
-      (error, results) => {
-        if (error) {
-          res.json({ error });
-        } else {
-          res.status(200).json({ results });
-        }
-      }
-    );
-  } catch (err) {
-    res.status(500).json({ error: err });
-  }
+  //   const ficheUser = await mysqlconnection.query(
+  //     querySql,
+  //     [values],
+  //     (error, results) => {
+  //       if (error) {
+  //         res.json({ error });
+  //       } else {
+  //         res.status(200).json({ results });
+  //         console.log("results");
+  //         console.log(results);
+  //       }
+  //     }
+  //   );
+  // } catch (err) {
+  //   res.status(500).json({ error: err });
+  // }
 };
 
 //ECMAScript2017
@@ -141,6 +256,7 @@ exports.readOneFicheUser = async (req, res) => {
 // };
 
 exports.updateOneFicheUser = async (req, res) => {
+  console.log("-----------ROUTE PUT---------------------------------------");
   console.log("--->ROUTE PUT : updateOneFicheUser");
   console.log(req.params.id);
 
@@ -186,18 +302,18 @@ exports.updateOneFicheUser = async (req, res) => {
                 } else {
                   console.log("--data");
                   console.log(data);
-                  Boolean(data)
+                  Boolean(data);
                 }
               });
 
               //suppression de l'image dans le dossier images du serveur
               fs.unlink(`images/${filename}`, (error) => {
                 if (error) {
-                  console.log(error)
+                  console.log(error);
                 }
               });
             }
- 
+
             //l'objet qui va être mise à jour dans la base de donnée
             console.log("--->CONTENU: req.body");
             console.log(req.body);
@@ -240,10 +356,28 @@ exports.updateOneFicheUser = async (req, res) => {
                   `id_fiche_user` = 19
 
          */
-            const { userId, nom, prenom, age, job, bio, photoProfilUrl, newFiche } =
-              ficheUserObject;
+            const {
+              userId,
+              nom,
+              prenom,
+              age,
+              job,
+              bio,
+              photoProfilUrl,
+              newFiche,
+            } = ficheUserObject;
+
             console.log("-->userId, nom, prenom, age,  photoProfilUrl");
-            console.log(userId, nom, prenom, age, job, bio, photoProfilUrl,newFiche);
+            console.log(
+              userId,
+              nom,
+              prenom,
+              age,
+              job,
+              bio,
+              photoProfilUrl,
+              newFiche
+            );
 
             const querySql = req.file
               ? `
@@ -275,10 +409,10 @@ exports.updateOneFicheUser = async (req, res) => {
           `;
 
             const values = req.file
-              ? [nom, prenom, age, job, bio, photoProfilUrl,newFiche, id ]
+              ? [nom, prenom, age, job, bio, photoProfilUrl, newFiche, id]
               : [nom, prenom, age, job, bio, newFiche, id];
 
-            console.log("-->values");
+            console.log("-->values   ");
             console.log(values);
 
             mysqlconnection.query(querySql, values, (error, results) => {
@@ -286,7 +420,7 @@ exports.updateOneFicheUser = async (req, res) => {
                 res.status(500).json({ error });
               } else {
                 res.status(201).json({
-                  message: "mise à jour OK dans la base de données",
+                  message: "mise à jour OK dans la base de données ",
                   results,
                 });
               }
@@ -434,3 +568,5 @@ exports.readFicheUserComment = async (req, res) => {
     res.status(500).json({ error });
   }
 };
+
+//
