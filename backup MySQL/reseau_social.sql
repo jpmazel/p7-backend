@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 02 juil. 2022 à 16:39
+-- Généré le : sam. 20 août 2022 à 17:21
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -42,7 +42,9 @@ CREATE TABLE `comments_user` (
 INSERT INTO `comments_user` (`id_comments_user`, `comments_user_id_posts`, `comments_user_userId`, `comments_user_message`, `comments_user_date`) VALUES
 (300, 748, 75, 'Bonjour, Barbara bienvenu sur le nouveau réseau social', '2022-05-31 11:43:39'),
 (315, 750, 2, 'c\'est super', '2022-06-04 08:37:54'),
-(316, 748, 2, 'salut , moi ça fait 10 ans et je suis toujours là', '2022-06-04 08:38:23');
+(316, 748, 2, 'salut , moi ça fait 10 ans et je suis toujours là', '2022-06-04 08:38:23'),
+(384, 808, 2, 'salut', '2022-08-19 20:08:36'),
+(388, 780, 2, 'super intéressant ', '2022-08-20 17:18:44');
 
 -- --------------------------------------------------------
 
@@ -67,9 +69,10 @@ CREATE TABLE `fiche_user` (
 --
 
 INSERT INTO `fiche_user` (`id_fiche_user`, `fiche_user_userId`, `fiche_user_nom`, `fiche_user_prenom`, `fiche_user_age`, `fiche_user_job`, `fiche_user_bio`, `fiche_user_photoProfilUrl`, `fiche_user_new_fiche`) VALUES
-(7, 2, 'BROWN', 'Brenda', 36, 'UX Designer', 'L\'UX Designer a comme objectif de diminuer au maximum les interrogations que peut avoir un utilisateurs lors de sa navigation sur un site web. Il doit donc faire en sorte que l\'ergonomie soit adapté à la fois aux cibles définies mais aussi au message de la marque, aux messages marketing et aux éléments de réassurances', 'http://localhost:3000/images/photo-by-face-generator_femme-1.jpg.jpg_1654974718316.jpg', NULL),
-(136, 57, 'SCOTT', 'Barbara ', 32, 'Développeur front-end', 'Le développeur front end programme la partie visible, l\'interface utilisateur d\'une app ou d\'un site web ', 'http://localhost:3000/images/photo-by-face-generator_femme-2.jpg.jpg_1654974757696.jpg', NULL),
-(148, 75, 'DOE', 'John', 43, 'Développeur Web full stack javascript', 'J\'apprends les technologies pour être développeur full stack JavaScript.\nChez Groupomania je suis ADMINISTRATEUR et modérateur des messages du réseau social www\n', 'http://localhost:3000/images/fakePhoto1-512x512px.jpg_1655046997113.jpg', NULL);
+(7, 2, 'BROWN', 'Brenda', 36, 'UX Designer', 'L\'UX Designer a comme objectif de diminuer au maximum les interrogations que peut avoir un utilisateurs lors de sa navigation sur un site web. Il doit donc faire en sorte que l\'ergonomie soit adapté à la fois aux cibles définies mais aussi au message de la marque, aux messages marketing et aux éléments de réassurances\ntest01@test.com', 'http://localhost:3000/images/photo-by-face-generator_femme-1.jpg.jpg_1654974718316.jpg', '1'),
+(136, 57, 'SCOTT', 'Barbara ', 32, 'Développeur front-end', 'Le développeur front end programme la partie visible, l\'interface utilisateur d\'une app ou d\'un site web \ntest02@test.com', 'http://localhost:3000/images/photo-by-face-generator_femme-2.jpg.jpg_1654974757696.jpg', '1'),
+(148, 75, 'DOE', 'John', 43, 'Développeur Web full stack javascript', 'J\'apprends les technologies pour être développeur full stack JavaScript.\nChez Groupomania je suis ADMINISTRATEUR et modérateur des messages du réseau social test@test.com\n', 'http://localhost:3000/images/fakePhoto1-512x512px.jpg_1655046997113.jpg', '1'),
+(218, 127, 'TEST', 'Test', 22, 'test', 'test', 'http://localhost:3000/images/IMAGE-LOGO-CHAINE-YOUTUBE.jpg_1660932607187.jpg', '1');
 
 -- --------------------------------------------------------
 
@@ -95,7 +98,10 @@ INSERT INTO `likes_user` (`id_likes_user`, `likes_user_id_posts`, `likes_user_us
 (76, 750, 2, 1),
 (77, 750, 57, 1),
 (79, 748, 2, 1),
-(98, 780, 75, 1);
+(98, 780, 75, 1),
+(127, 808, 2, 1),
+(128, 808, 127, 1),
+(131, 780, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -144,7 +150,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `email`, `password`, `admin`, `date`) VALUES
 (2, 'e12895395f30e7274b08d75ce008363ad54c70ac8ad95dad48f88a36ee5cc3ee', '$2b$10$ZEelhLAYrFaJO.iY0mYE0utGfPtj/MYxDyxaftgo6chJ41FyjRb8O', NULL, '2022-04-21 11:14:29'),
 (57, '4598428dd0c2833d609b43ec091ef970a6d3f3b51c4c90c07cd699a3ae7e85df', '$2b$10$HNTDfyyi8smom2bLLPp2wORQaTtiFLgWth0KXQl2uGvszB3L8ina.', NULL, '2022-05-26 14:08:13'),
-(75, '27eede426cf4692668a47a3d0b653e726580a30d88eb52f687daad26658bb466', '$2b$10$5cuhZw0QKuAdLDJzZfsgyOSqA9yZfcJVkomQZ7qEcDOYI5IO4yKeS', 1, '2022-05-28 17:18:37');
+(75, '27eede426cf4692668a47a3d0b653e726580a30d88eb52f687daad26658bb466', '$2b$10$5cuhZw0QKuAdLDJzZfsgyOSqA9yZfcJVkomQZ7qEcDOYI5IO4yKeS', 1, '2022-05-28 17:18:37'),
+(127, 'e0defec426d94c3f3f2ba3f17f4d8c9b4bf1c24cd55e317494f431e12e9b93b0', '$2b$10$ouw5XcfMYrb1yR9dn385wemF.svwWLWylgwX2CLfjefc8C8uWICJi', NULL, '2022-08-19 20:09:20');
 
 --
 -- Index pour les tables déchargées
@@ -163,6 +170,7 @@ ALTER TABLE `comments_user`
 --
 ALTER TABLE `fiche_user`
   ADD PRIMARY KEY (`id_fiche_user`),
+  ADD UNIQUE KEY `fiche_user_userId_2` (`fiche_user_userId`),
   ADD KEY `fiche_user_userId` (`fiche_user_userId`);
 
 --
@@ -196,31 +204,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `comments_user`
 --
 ALTER TABLE `comments_user`
-  MODIFY `id_comments_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=363;
+  MODIFY `id_comments_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=389;
 
 --
 -- AUTO_INCREMENT pour la table `fiche_user`
 --
 ALTER TABLE `fiche_user`
-  MODIFY `id_fiche_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
+  MODIFY `id_fiche_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=222;
 
 --
 -- AUTO_INCREMENT pour la table `likes_user`
 --
 ALTER TABLE `likes_user`
-  MODIFY `id_likes_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id_likes_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
 -- AUTO_INCREMENT pour la table `posts_user`
 --
 ALTER TABLE `posts_user`
-  MODIFY `id_posts_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=829;
+  MODIFY `id_posts_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=846;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 
 --
 -- Contraintes pour les tables déchargées

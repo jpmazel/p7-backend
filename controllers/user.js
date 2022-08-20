@@ -93,7 +93,7 @@ exports.login = (req, res) => {
             if (!controlPassword) {
               return res
                 .status(401)
-                .json({ error: " Vérifier l'email et / ou le password" });
+                .json({ error: "Vérifier l'email et / ou le password" });
             }
 
             //si le password est correct
@@ -124,7 +124,9 @@ exports.login = (req, res) => {
 };
 
 //DELETE account pour supprimer le compte utilisateur
-//je récupére l'id de l'utilisateur à supprimer
+//pour supprimer la photo de l'utilisateur sur le serveur
+//et toutes les données de l'utilisateur sur la base de données
+
 exports.deleteAccount = async (req, res) => {
   console.log("je suis dans le controller deleteAccount");
 
@@ -156,17 +158,21 @@ exports.deleteAccount = async (req, res) => {
         console.log(results);
 
         // 03-Récupération du nom de la photo qui vient de la bdd
-        const filename =
-          results[0].fiche_user_photoProfilUrl.split("/images")[1];
-        console.log("--->filename");
-        console.log(filename);
-
-        //04-Suppression de la photo de profil qui est dans le dossier images du serveur
-        fs.unlink(`images/${filename}`, (error) => {
-          if (error) {
-            console.log(error);
-          }
-        });
+        if (results.length > 0) {
+          const filename =
+            results[0].fiche_user_photoProfilUrl.split("/images")[1];
+          console.log("--->filename");
+          console.log(filename);
+          //04-Suppression de la photo de profil qui est dans le dossier images du serveur
+          fs.unlink(`images/${filename}`, (error) => {
+            if (error) {
+              console.log(error);
+            }
+          });
+          console.log("--->La photo a été supprimer du dossier image");
+        } else {
+          console.log("--->IL n'y a pas de photo de profil");
+        }
 
         //05-La suppression du compte utilisateur et de toutes données de l'utilisateur sur la bdd
         //La requête SQL pour la suppresion du compte
